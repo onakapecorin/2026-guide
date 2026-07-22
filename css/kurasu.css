@@ -1,0 +1,761 @@
+@charset "UTF-8";
+
+/* ==========================================================================
+   1. 全体設定・共通の変数
+   ========================================================================== */
+:root {
+  --color-text-main: #333333;
+  --color-text-sub: #666666;
+  --color-bg-main: #ffffff;
+  --color-ui-dark: #333333;
+  --font-family-base: "游ゴシック体", YuGothic, "游ゴシック Medium", "Yu Gothic Medium", "游ゴシック", "Yu Gothic", sans-serif;
+}
+
+html {
+  box-sizing: border-box;
+  font-size: 16px;
+  scroll-behavior: smooth;
+  scroll-padding-top: 100px;
+  overflow-x: hidden;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-family-base);
+  color: var(--color-text-main);
+  background-color: var(--color-bg-main);
+  line-height: 1.9;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 80px;
+  width: 100%;
+}
+
+body.is-mobile-mode .container {
+  padding: 0 32px !important;
+}
+
+/* ==========================================================================
+   2. ヘッダー (共通)
+   ========================================================================== */
+.site-header {
+  width: 100%;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: #ffffff;
+  z-index: 1000;
+}
+
+.site-header__inner {
+  height: 70px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 30px;
+  padding-right: 30px;
+}
+
+body.is-mobile-mode .site-header__inner {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.site-logo {
+  margin: 0;
+  transition: opacity 0.2s ease;
+}
+
+.site-logo a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  text-decoration: none;
+  color: var(--color-text-main);
+}
+
+.site-logo__text {
+  font-weight: bold;
+  font-size: 1.125rem;
+  letter-spacing: 0.05em;
+  line-height: 1.2;
+}
+
+.site-logo__subtext {
+  font-size: 0.6875rem;
+  font-weight: normal;
+  color: var(--color-text-sub);
+  margin-top: 4px;
+  letter-spacing: 0.02em;
+}
+
+.nav-toggle,
+.nav-toggle-open,
+.nav-toggle-close {
+  display: none !important;
+}
+
+.main-nav {
+  position: static;
+  width: auto;
+  height: auto;
+  background-color: transparent;
+  opacity: 1;
+  visibility: visible;
+}
+
+.nav-list {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 20px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-list__link {
+  text-decoration: none;
+  color: var(--color-text-main);
+  font-size: 0.9375rem;
+  white-space: nowrap;
+}
+
+.current-page {
+  font-weight: bold;
+}
+
+/* ==========================================================================
+   3. 「暮らす」ページ・他共通のレイアウト＆装飾
+   ========================================================================== */
+.site-main {
+  margin-top: 70px;
+}
+
+/* ページタイトル */
+.page-hero {
+  /* 🛠️ HTML側で指定するため、ここにあった background: url(...) の記述を消去 */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  padding: 180px 20px 180px;
+  text-align: center;
+}
+
+.page-hero__title {
+  font-size: 3rem;
+  font-weight: normal;
+  letter-spacing: 0.15em;
+  margin: 0;
+  color: var(--color-text-main);
+  line-height: 1;
+}
+
+/* 目次ブロック */
+.toc-block {
+  max-width: 500px;
+  margin: 180px auto 220px !important;
+  padding: 50px 20px;
+  border-top: 2px solid #bce274;
+  border-bottom: 2px solid #bce274;
+  text-align: center;
+}
+
+.toc-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: 0.9375rem;
+  line-height: 2.8;
+}
+
+.toc-list li a {
+  text-decoration: none;
+  color: var(--color-text-main);
+  transition: opacity 0.2s ease, color 0.2s ease;
+  display: block;
+}
+
+.toc-list li a:hover {
+  opacity: 0.6;
+  color: #8bb334;
+}
+
+.toc-list li span {
+  font-weight: bold;
+  margin-right: 8px;
+}
+
+/* 記事全体の幅と余白調整 */
+.article-content-body {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* 各トピック（章）のまとまり */
+.article-section {
+  margin-bottom: 240px;
+}
+
+/* 記事ヘッダーエリア */
+.article-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 60px;
+  margin-bottom: 80px;
+  gap: 30px;
+}
+
+.article-title-wrap {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+.number-badge {
+  background-color: #00b020;
+  color: #ffffff;
+  font-size: 2.2rem;
+  font-weight: bold;
+  width: 75px;
+  height: 75px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.article-title {
+  text-align: left;
+  margin: 0;
+}
+
+.article-title__sub {
+  font-size: 1.125rem;
+  margin-bottom: 8px;
+  font-weight: normal;
+}
+
+.article-title__main {
+  font-size: 1.875rem;
+  font-weight: bold;
+  letter-spacing: 0.05em;
+  margin: 0;
+}
+
+/* 右側の難易度バッジ情報 */
+.difficulty-badge {
+  font-size: 0.75rem;
+  line-height: 1.6;
+  text-align: right;
+  color: #333;
+  border-left: 1px dashed #ccc;
+  padding-left: 20px;
+  flex-shrink: 0;
+}
+
+/* 会話風ブロック */
+.dialogue-section {
+  max-width: 600px;
+  margin: 80px auto;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.dialogue-row {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+}
+
+.dialogue-user-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+  width: 70px;
+}
+
+.dialogue-avatar {
+  width: 60px;
+  height: 60px;
+  background-color: #55959a48;
+  border-radius: 50%;
+}
+
+.dialogue-name {
+  font-size: 0.75rem;
+  color: var(--color-text-sub);
+  text-align: center;
+  white-space: nowrap;
+}
+
+.dialogue-text {
+  font-size: 0.9375rem;
+  color: var(--color-text-main);
+  text-align: left;
+  line-height: 1.8;
+}
+
+/* 緑のアンダーライン付きの見出し */
+.highlight-heading {
+  font-size: 1.5rem;
+  text-align: left;
+  margin: 80px 0 40px;
+  display: inline-block;
+  background: linear-gradient(transparent 70%, #bce274 70%);
+}
+
+/* 本文テキスト */
+.article-text {
+  font-size: 0.9375rem;
+  color: var(--color-text-main);
+  text-align: left;
+  line-height: 2.2;
+  margin-bottom: 40px;
+}
+
+/* 生存戦略の見出し */
+.icon-heading {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  font-size: 1.25rem;
+  margin: 140px 0 30px !important;
+  text-align: left;
+}
+
+.icon-heading__icon {
+  font-size: 2.2rem;
+}
+
+.icon-heading__text {
+  margin: 0;
+  font-size: 1.375rem;
+  font-weight: bold;
+}
+
+.secondary-intro {
+  margin-bottom: 30px;
+}
+
+/* 箇条書きリスト */
+.custom-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 190px 0 !important;
+  text-align: left;
+  font-size: 0.9375rem;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.custom-list li {
+  position: relative;
+  padding-left: 20px;
+  line-height: 1.8;
+}
+
+.custom-list li::before {
+  content: "・";
+  position: absolute;
+  left: 0;
+  color: var(--color-text-main);
+}
+
+/* 細いグレーの区切り線 */
+.thin-separator {
+  width: 300px;
+  height: 1px;
+  background-color: #cccccc;
+  margin: 120px auto 80px !important;
+  border: none;
+}
+
+/* エピローグ・まとめエリア */
+.epilogue-block {
+  max-width: 650px;
+  margin: 100px auto 100px;
+  text-align: center;
+  font-size: 0.9375rem;
+  color: var(--color-text-main);
+}
+
+.epilogue-block p {
+  display: block;
+  text-align: center;
+  line-height: 2.4;
+  margin-top: 0;
+  margin-bottom: 24px;
+}
+
+.epilogue-block p:last-child {
+  margin-bottom: 0;
+}
+
+/* ページトップへ戻るボタン */
+.btn-to-top {
+  position: fixed;
+  right: 30px;
+  bottom: 30px;
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 1px solid var(--color-ui-dark);
+  background-color: rgba(255, 255, 255, 0.9);
+  color: var(--color-ui-dark);
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.btn-to-top:hover {
+  background-color: var(--color-ui-dark);
+  color: #ffffff;
+  transform: translateY(-4px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+/* ==========================================================================
+   4. フッター (共通)
+   ========================================================================== */
+.site-footer {
+  background-color:#5a432c;
+;
+;
+  color: #ffffff;
+  padding: 50px 0;
+  width: 100%;
+}
+
+.footer-logo {
+  text-align: center;
+  font-size: 0.8125rem;
+  line-height: 1.6;
+  padding: 0 15px;
+}
+
+.footer-logo__text-small {
+  font-size: 0.6875rem;
+  margin-top: 5px;
+  display: block;
+  opacity: 0.7;
+}
+
+/* ==========================================================================
+   5. スマホ・レスポンシブ表示の一括制御ブロック
+   ========================================================================== */
+body.is-mobile-mode {
+  .container {
+    padding: 0 32px !important;
+  }
+
+  .site-header__inner {
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+  }
+
+  .nav-toggle-open {
+    right: 20px !important;
+  }
+
+  .article-content-body {
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow-x: hidden !important;
+  }
+
+  .dialogue-section {
+    padding: 0 10px;
+    max-width: 100% !important;
+    overflow: hidden;
+  }
+
+  .epilogue-block {
+    padding: 20px 15px !important;
+    max-width: 100% !important;
+    box-sizing: border-box;
+  }
+
+  /* ハンバーバーメニュー制御 */
+  .nav-toggle-open {
+    display: flex !important;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 22px;
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10001;
+  }
+
+  .nav-toggle-open span {
+    display: block;
+    width: 100%;
+    height: 3px;
+    background-color: var(--color-text-main);
+    border-radius: 2px;
+  }
+
+  .main-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #ffffff;
+    z-index: 99999;
+    transform: translateX(100%);
+    opacity: 0;
+    visibility: hidden;
+    transition: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .nav-list {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 32px;
+    width: 100%;
+  }
+
+  .nav-list__link {
+    font-size: 1.5rem;
+  }
+
+  #nav-toggle:checked~.main-nav {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0);
+    transition: transform 0.3s ease, opacity 0.3s ease;
+  }
+
+  #nav-toggle:checked~.nav-toggle-open {
+    display: none !important;
+  }
+
+  #nav-toggle:checked~.main-nav .nav-toggle-close {
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 44px;
+    height: 44px;
+    font-size: 32px;
+    color: #000000;
+    cursor: pointer;
+  }
+
+  #nav-toggle:checked~.site-logo {
+    opacity: 0 !important;
+    visibility: hidden !important;
+  }
+
+  /* 記事エリアのスマホ調整 */
+  .article-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
+
+  .article-title__main {
+    font-size: clamp(1.3rem, 6vw, 1.6rem);
+  }
+
+  .number-badge {
+    width: 50px;
+    height: 50px;
+    font-size: 1.5rem;
+  }
+
+  /* スマホ版のヒーロー画像調整 */
+  .page-hero {
+    /* 🛠️ ここにあった background-image の打ち消し(!important)を削除 */
+    padding: 90px 20px 90px !important;
+  }
+
+  .page-hero__title {
+    font-size: 2.2rem;
+  }
+
+  .btn-to-top {
+    right: 20px;
+    bottom: 20px;
+    width: 44px;
+    height: 44px;
+    font-size: 1.25rem;
+  }
+
+  .epilogue-block p,
+  .epilogue-block text,
+  .epilogue-text {
+    font-size: 0.88rem !important;
+    white-space: normal !important;
+    word-break: break-all !important;
+    line-height: 2.2 !important;
+  }
+
+  .dialogue-text {
+    font-size: 0.9rem !important;
+    white-space: normal !important;
+    word-break: break-all !important;
+    flex: 1;
+  }
+
+  .article-title__sub {
+    font-size: clamp(0.75rem, 3.8vw, 1.125rem) !important;
+    white-space: nowrap !important;
+  }
+
+  .article-title__main {
+    font-size: clamp(0.95rem, 4.5vw, 1.5rem) !important;
+    white-space: nowrap !important;
+  }
+
+  .highlight-heading {
+    font-size: clamp(0.85rem, 4.2vw, 1.4rem) !important;
+    white-space: nowrap !important;
+  }
+
+  .icon-heading__text {
+    font-size: clamp(0.9rem, 4.2vw, 1.3rem) !important;
+    white-space: nowrap !important;
+  }
+
+  .toc-list li span {
+    font-size: 0.9rem;
+  }
+
+  .difficulty-badge {
+    text-align: left !important;
+    border-left: none !important;
+    border-top: 1px dashed #ccc !important;
+    padding-left: 0 !important;
+    padding-top: 15px !important;
+    width: 100% !important;
+    white-space: normal !important;
+  }
+
+  .difficulty-badge br:nth-of-type(3),
+  .difficulty-badge br:nth-of-type(4) {
+    display: none !important;
+  }
+}
+
+/* ==========================================================================
+   6. 「人と関わる」ページ専用の追加装飾（3大奥義カード）
+   ========================================================================== */
+.ogis-container {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  margin: 60px auto;
+  max-width: 700px;
+}
+
+.ogi-card {
+  position: relative;
+  background-color: #ffffff;
+  border: 3px double #8bb334;
+  border-radius: 24px;
+  padding: 35px 40px;
+  text-align: center;
+  box-shadow: 0 4px 15px rgba(139, 179, 52, 0.05);
+}
+
+.ogi-card::before,
+.ogi-card::after {
+  content: "✿";
+  position: absolute;
+  color: #bce274;
+  font-size: 1.2rem;
+  opacity: 0.7;
+}
+
+.ogi-card::before {
+  top: 10px;
+  left: 15px;
+}
+
+.ogi-card::after {
+  bottom: 10px;
+  right: 15px;
+}
+
+.ogi-card__title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #333333;
+  margin-top: 0;
+  margin-bottom: 20px;
+  letter-spacing: 0.05em;
+}
+
+.ogi-card__text {
+  font-size: 0.9375rem;
+  color: #555555;
+  line-height: 1.8;
+  text-align: left;
+  margin: 0;
+}
+
+body.is-mobile-mode {
+  .ogi-card {
+    padding: 25px 20px;
+    border-radius: 16px;
+  }
+
+  .ogi-card__title {
+    font-size: clamp(1.1rem, 4.5vw, 1.3rem) !important;
+    white-space: normal !important;
+  }
+
+  .ogi-card__text {
+    font-size: 0.88rem !important;
+    line-height: 1.7 !important;
+  }
+}
