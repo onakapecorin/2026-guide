@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>いなかと、わたし。</title>
+  <meta name="description" content="初めて田舎暮らしをする人へ向けた、アクセシビリティと保守性を重視したシンプルなWebサイトです。" />
+  <!-- 外部CSSファイルの読み込み -->
+  <link rel="stylesheet" href="./css/style.css" />
+  <link rel="stylesheet" href="./css/common.css" />
+</head>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    // ─── 既存のスライダー用データと処理 ───
+    const diaryData = [
+      { date: "2026.07.20", caption: "また明日。" },
+      { date: "2026.06.18", caption: "夜空からの贈り物。" },
+      { date: "2026.06.29", caption: "静かな昼下がり。" },
+      { date: "2026.07.05", caption: "ヤギさんのごあいさつ。" },
+      { date: "2026.07.14", caption: "夏が、そろそろ。" },
+    ];
+
+    const cards = Array.from(document.querySelectorAll(".slider-card"));
+    const prevBtn = document.getElementById("slider-prev");
+    const nextBtn = document.getElementById("slider-next");
+    const dateEl = document.getElementById("diary-date");
+    const captionEl = document.getElementById("diary-caption");
+
+    let currentIndex = 0;
+    const totalSlides = cards.length;
+
+    function updateSlider() {
+      cards.forEach((card, i) => {
+        card.classList.remove("is-active", "is-prev", "is-next");
+        card.setAttribute("aria-hidden", "true");
+
+        if (i === currentIndex) {
+          card.classList.add("is-active");
+          card.removeAttribute("aria-hidden");
+        } else if (i === (currentIndex - 1 + totalSlides) % totalSlides) {
+          card.classList.add("is-prev");
+        } else if (i === (currentIndex + 1) % totalSlides) {
+          card.classList.add("is-next");
+        }
+      });
+
+      dateEl.textContent = diaryData[currentIndex].date;
+      captionEl.textContent = diaryData[currentIndex].caption;
+    }
+
+    function nextSlide() { currentIndex = (currentIndex + 1) % totalSlides; updateSlider(); }
+    function prevSlide() { currentIndex = (currentIndex - 1 + totalSlides) % totalSlides; updateSlider(); }
+
+    nextBtn.addEventListener("click", prevSlide);
+    prevBtn.addEventListener("click", nextSlide);
+    updateSlider();
+
+
+    // ─── 【重要】サイト全体の表示モード切り替えシステム ───
+    const siteLogo = document.querySelector(".site-logo");
+    const mainNav = document.querySelector(".main-nav");
+
+    function checkNavigationLayout() {
+      // 一度PCモードの基準に戻して横幅を測る
+      document.body.classList.remove("is-mobile-mode");
+
+      // ロゴの右端と、メニューの左端のリアルタイム位置を取得
+      const logoRight = siteLogo.getBoundingClientRect().right;
+      const navLeft = mainNav.getBoundingClientRect().left;
+
+      // メニューとロゴがぶつかりそう（間隔が30px未満）になったら
+      if (navLeft - logoRight < 30) {
+        // 🌟 body全体をスマホモードに変身させる
+        document.body.classList.add("is-mobile-mode");
+      }
+    }
+
+    // 画面リサイズ時と読み込み時に実行
+    window.addEventListener("resize", checkNavigationLayout);
+    checkNavigationLayout();
+  });
+</script>
+
+<body>
+  <!-- --- 1. Header Area (ヘッダー：絡まっていた二重構造を一本化) --- -->
+  <header class="site-header">
+    <div class="site-header__inner">
+
+      <!-- ロゴエリア（メニューが開くと自動で隠れます） -->
+      <h1 class="site-logo">
+        <a href="#">
+          <span class="site-logo__text">いなかと、わたし。</span>
+          <span class="site-logo__subtext">-田舎出身学生によるくらしのてびき-</span>
+        </a>
+      </h1>
+
+      <!-- ハンバーガーメニュー開閉スイッチ（CSSの変数と揃えるため id と class を完全に一本化） -->
+      <input type="checkbox" id="nav-toggle" class="visually-hidden" />
+
+      <!-- ① メニューを開く用の三本線ボタン（CSS側の .nav-toggle-open に完全に連動） -->
+      <label for="nav-toggle" class="nav-toggle-open" aria-label="メニューを開く">
+        <span></span>
+        <span></span>
+        <span></span>
+      </label>
+
+      <!-- ドロワーメニュー本体（白い背景） -->
+      <nav class="main-nav">
+        <!-- ② メニューを閉じる用の「✕」ボタン -->
+        <label for="nav-toggle" class="nav-toggle-close" aria-label="メニューを閉じる">✕</label>
+
+        <!-- メニューリスト -->
+        <ul class="nav-list">
+          <li><a href="index.html" class="nav-list__link current-page">ホーム</a></li>
+          <li><a href="kurasu.html" class="nav-list__link">暮らす</a></li>
+          <li><a href="hito.html" class="nav-list__link">人と関わる</a></li>
+          <li><a href="taberu.html" class="nav-list__link">食べる</a></li>
+          <li><a href="tanoshimu.html" class="nav-list__link">楽しむ</a></li>
+          <li><a href="kininaru.html" class="nav-list__link">キニナルイナカ</a></li>
+          <li><a href="nichijo.html" class="nav-list__link">いなかの日常</a></li>
+        </ul>
+      </nav>
+
+    </div>
+  </header>
+
+  <!-- --- 2. Main Content Area (メインコンテンツ全体) --- -->
+  <main class="site-main">
+    <!-- --- Hero Section (ヒーローエリア) --- -->
+    <section class="hero">
+      <div class="hero-image__wrapper">
+        <!-- スライドショー背景（3枚） -->
+        <div class="hero-slides">
+          <div class="hero-slide" aria-hidden="true">
+            <img src="img/inaka_kusa 2.png" alt="" />
+          </div>
+          <div class="hero-slide" aria-hidden="true">
+            <img src="img/1.png" alt="" />
+          </div>
+          <div class="hero-slide" aria-hidden="true">
+            <img src="img/2.png" alt="" />
+          </div>
+        </div>
+
+        <!-- ヒーロー画像のテキスト -->
+        <div class="hero-text">
+          <p class="hero-text__main">心地よく、地に足をつけて。</p>
+          <p class="hero-text__sub">
+            上京した私が伝えたい、<br />わたしらしい田舎暮らし。
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <div class="container">
+      <!-- --- Intro Text Section (イントロダクション) --- -->
+      <section class="section">
+        <div class="intro-text-block">
+          <p class="intro-text__paragraph">
+            都会の便利さに憧れて上京した私が気づいた、田舎の時間の「本当の贅沢さ」。
+          </p>
+          <p class="intro-text__quote">「車がないと生きていけない？」</p>
+          <p class="intro-text__quote">「インフレは大丈夫？」</p>
+          <p class="intro-text__paragraph">リアルな不安に、寄り添う。</p>
+          <p class="intro-text__paragraph">憧れだけで終わらせない、地に足のついた暮らしをナビゲートする</p>
+          <p class="intro-text__paragraph">優しいてびきです。</p>
+        </div>
+        <hr class="section-separator" aria-hidden="true" />
+      </section>
+
+      <!-- --- Profile Section (プロフィール) --- -->
+      <section class="section">
+        <div class="profile">
+          <div class="profile-meta">
+            <img src="img/m1.png" alt="" class="profile-icon" />
+            <span class="profile-name">まうさん</span>
+          </div>
+          <div class="profile-content">
+            <p>
+              地方の田舎出身の大学2年生。大学進学を機に上京し、都会の忙しさの中で「実家の豊かな時間」に気づく。SNSのエモいイメージと、リアルな田舎のギャップをマイルドに埋めるため、田舎で暮らすうえで培った『不便を愛おしむライフハック』を発信中。ダンゴムシ以外の虫は触れません。田舎出身なのに。
+            </p>
+          </div>
+        </div>
+        <hr class="section-separator" aria-hidden="true" />
+      </section>
+
+      <!-- --- Category Grid Section (カテゴリーグリッド) --- -->
+      <section class="section">
+        <h2 class="visually-hidden">カテゴリー一覧</h2>
+        <div class="grid-block">
+
+          <!-- 暮 -->
+          <!-- 暮 -->
+          <a href="kurasu.html" class="grid-item"
+            style="position: relative; overflow: hidden; display: block; text-decoration: none;">
+            <!-- 🌟背景ブラー層 -->
+            <div
+              style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-image: url('img/32.png'); background-size: cover; background-position: center; filter: blur(3px); transform: scale(1.05); z-index: 1;">
+            </div>
+
+            <span class="grid-item__symbol"
+              style="position: absolute; color: #ffffff; z-index: 2; text-shadow: 0 2px 8px rgba(0,0,0,0.5);">暮</span>
+            <div class="grid-item__hover" style="position: absolute; z-index: 3;">
+              <h3 class="grid-item__hover-title">暮らす</h3>
+              <p class="grid-item__hover-label">キーワード</p>
+              <ul class="grid-item__hover-tags">
+                <li>虫対策</li>
+                <li>交通手段</li>
+                <li>インフラ</li>
+                <li>草刈り</li>
+              </ul>
+            </div>
+          </a>
+
+          <!-- 人 -->
+          <!-- 人 -->
+          <a href="hito.html" class="grid-item"
+            style="position: relative; overflow: hidden; display: block; text-decoration: none;">
+            <!-- 🌟背景ブラー層 -->
+            <div
+              style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-image: url('img/13.png'); background-size: cover; background-position: center; filter: blur(3px); transform: scale(1.05); z-index: 1;">
+            </div>
+
+            <span class="grid-item__symbol"
+              style="position: absolute; color: #ffffff; z-index: 2; text-shadow: 0 2px 8px rgba(0,0,0,0.5);">人</span>
+            <div class="grid-item__hover" style="position: absolute; z-index: 3;">
+              <h3 class="grid-item__hover-title">人と関わる</h3>
+              <p class="grid-item__hover-label">キーワード</p>
+              <ul class="grid-item__hover-tags">
+                <li>防犯システム</li>
+                <li>噂話</li>
+                <li>子育て環境</li>
+                <li>可愛がられるコツ</li>
+              </ul>
+            </div>
+          </a>
+
+          <!-- 食 -->
+          <!-- 食 -->
+          <a href="taberu.html" class="grid-item"
+            style="position: relative; overflow: hidden; display: block; text-decoration: none;">
+            <!-- 🌟背景ブラー層 -->
+            <div
+              style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-image: url('img/30.png'); background-size: cover; background-position: center; filter: blur(3px); transform: scale(1.05); z-index: 1;">
+            </div>
+
+            <span class="grid-item__symbol"
+              style="position: absolute; color: #ffffff; z-index: 2; text-shadow: 0 2px 8px rgba(0,0,0,0.5);">食</span>
+            <div class="grid-item__hover" style="position: absolute; z-index: 3;">
+              <h3 class="grid-item__hover-title">食べる</h3>
+              <p class="grid-item__hover-label">キーワード</p>
+              <ul class="grid-item__hover-tags">
+                <li>無限野菜</li>
+                <li>大量消費</li>
+                <li>お裾分け</li>
+                <li>美味しいお水と空気</li>
+                <li>四季</li>
+              </ul>
+            </div>
+          </a>
+
+          <!-- 楽 -->
+          <a href="tanoshimu.html" class="grid-item"
+            style="position: relative; overflow: hidden; display: block; text-decoration: none;">
+            <!-- 🌟背景ブラー層 -->
+            <div
+              style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-image: url('img/3.png'); background-size: cover; background-position: center; filter: blur(3px); transform: scale(1.05); z-index: 1;">
+            </div>
+
+            <span class="grid-item__symbol"
+              style="position: absolute; color: #ffffff; z-index: 2; text-shadow: 0 2px 8px rgba(0,0,0,0.5);">楽</span>
+            <div class="grid-item__hover" style="position: absolute; z-index: 3;">
+              <h3 class="grid-item__hover-title">楽しむ</h3>
+              <p class="grid-item__hover-label">キーワード</p>
+              <ul class="grid-item__hover-tags">
+                <li>遊び放題</li>
+                <li>アウトドア</li>
+                <li>天体観測</li>
+                <li>時間リッチ</li>
+              </ul>
+            </div>
+          </a>
+
+        </div> <!-- 🟢grid-blockを閉じる -->
+
+        <!-- 🎨style属性で指定の背景色（アンティークホワイト）に変更しました -->
+        <a href="kininaru.html" class="wide-card" style="background-color: #6b8e23;">
+          <h3 class="wide-card__title">キニナルイナカ</h3>
+        </a>
+      </section> <!-- 🟢sectionを閉じる -->
+
+      <!-- --- Slider/Diary Section (いなかの日常 / スライダー) --- -->
+      <section class="section">
+        <h2 class="section-title">いなかの日常</h2>
+        <div class="slider-container">
+          <div class="slider-section">
+            <button class="slider-arrow slider-arrow--prev" id="slider-prev" aria-label="前のスライドへ">‹</button>
+
+            <div class="slider-track" id="slider-track">
+              <div class="slider-card" aria-hidden="true">
+                <img src="img/5.png" alt="" />
+              </div>
+              <div class="slider-card" aria-hidden="true">
+                <img src="img/8.png" alt="" />
+              </div>
+              <div class="slider-card" aria-hidden="true">
+                <img src="img/33.png" alt="" />
+              </div>
+              <div class="slider-card" aria-hidden="true">
+                <img src="img/31.png" alt="" />
+              </div>
+              <div class="slider-card" aria-hidden="true">
+                <img src="img/9.png" alt="" />
+              </div>
+            </div>
+
+            <button class="slider-arrow slider-arrow--next" id="slider-next" aria-label="次のスライドへ">›</button>
+          </div>
+
+          <div class="diary-details">
+            <span class="diary-date" id="diary-date">2026.07.20</span>
+            <p class="diary-caption" id="diary-caption">素敵な夕焼けに出会いました</p>
+            <a href="nichijo.html" class="btn-ghost">過去の日常 ›</a>
+          </div>
+        </div>
+        <hr class="section-separator" aria-hidden="true" />
+      </section>
+    </div>
+  </main>
+
+<!-- --- 3. Footer Area (フッター) --- -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-logo">
+        <span class="footer-logo__text">いなかと、わたし。</span>
+        <span class="footer-logo__text-small">～何気ない日常にある「わたしらしい田舎暮らし」～</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- 🆕 kurasu.cssのスタイルと完全に連動するトップ戻るボタン -->
+  <a href="#" class="btn-to-top" aria-label="ページトップへ戻る">↑</a>
+</body>
+</html>

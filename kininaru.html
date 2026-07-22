@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>キニナルイナカ - いなかと、わたし。</title>
+  <meta name="description" content="キニナルイナカ 質問箱" />
+  <link rel="stylesheet" href="./css/kurasu.css" />
+  <!-- 🆕 新しいCSSファイルをここで追加で読み込みます -->
+  <link rel="stylesheet" href="./css/common.css" />
+  <link rel="stylesheet" href="./css/kininaru.css" />
+</head>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const siteLogo = document.querySelector(".site-logo");
+    const mainNav = document.querySelector(".main-nav");
+
+    function checkNavigationLayout() {
+      document.body.classList.remove("is-mobile-mode");
+      const logoRight = siteLogo.getBoundingClientRect().right;
+      const navLeft = mainNav.getBoundingClientRect().left;
+
+      if (navLeft - logoRight < 30) {
+        document.body.classList.add("is-mobile-mode");
+      }
+    }
+
+    window.addEventListener("resize", checkNavigationLayout);
+    checkNavigationLayout();
+  });
+</script>
+
+<body>
+  <!-- --- 1. Header Area --- -->
+  <header class="site-header">
+    <div class="site-header__inner">
+      <h1 class="site-logo">
+        <a href="index.html">
+          <span class="site-logo__text">いなかと、わたし。</span>
+          <span class="site-logo__subtext">-田舎出身学生によるくらしのてびき-</span>
+        </a>
+      </h1>
+
+      <input type="checkbox" id="nav-toggle" class="visually-hidden" />
+      <label for="nav-toggle" class="nav-toggle-open" aria-label="メニューを開く">
+        <span></span><span></span><span></span>
+      </label>
+
+      <nav class="main-nav">
+        <label for="nav-toggle" class="nav-toggle-close" aria-label="メニューを閉じる">✕</label>
+        <ul class="nav-list">
+          <li><a href="index.html" class="nav-list__link">ホーム</a></li>
+          <li><a href="kurasu.html" class="nav-list__link">暮らす</a></li>
+          <li><a href="hito.html" class="nav-list__link">人と関わる</a></li>
+          <li><a href="taberu.html" class="nav-list__link">食べる</a></li>
+          <li><a href="tanoshimu.html" class="nav-list__link">楽しむ</a></li>
+          <li><a href="kininaru.html" class="nav-list__link current-page">キニナルイナカ</a></li>
+          <li><a href="nichijo.html" class="nav-list__link">いなかの日常</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- --- 2. Main Content Area --- -->
+  <main class="site-main">
+    <!-- タイトルの塊 -->
+    <section class="qbox-hero">
+      <h2 class="qbox-hero__title">キニナルイナカ</h2>
+    </section>
+
+    <!-- ボディ部分のコンテナ -->
+    <div class="container">
+
+      <!-- 💡 ココ！タイトルとフォームのちょうど真ん中に配置 -->
+      <p class="qbox-intro">
+        私、まうさんがみなさまの「田舎」に対する質問にお答えします！
+      </p>
+
+      <!-- 📥 質問投稿フォーム -->
+      <form class="qbox-form-card">
+        <div class="qbox-input-group">
+          <input type="text" class="qbox-input-name" placeholder="ニックネーム" required>
+        </div>
+        <div class="qbox-input-group">
+          <textarea class="qbox-input-text" placeholder="質問を入力" rows="5" required></textarea>
+        </div>
+        <!-- 紙飛行機送信ボタン -->
+        <button type="submit" class="qbox-submit-btn" aria-label="送信する">
+          <svg viewBox="0 0 24 24" class="icon-paperplane">
+            <path d="M2 21l21-9L2 3v7l15 2-15 2v7z" fill="none" stroke="#999" stroke-width="1.5"
+              stroke-linejoin="round" />
+          </svg>
+        </button>
+      </form>
+
+      <!-- 以下、回答セクションへと続きます... -->
+      <!-- 💬 回答セクション見出し -->
+      <div class="qbox-reply-header">
+        <h3>回答</h3>
+        <span>掲載期間 質問後3ヶ月</span>
+      </div>
+
+      <!-- 🌟 大きな最新の回答 -->
+      <div class="qbox-answer-card large-card">
+        <span class="qbox-nickname">おやま さんからの質問</span>
+        <span class="qbox-date">2026.07.21</span>
+
+        <div class="qbox-question-box">
+          <p class="qbox-question-text">田舎暮らしで一番驚いたことはなんですか？</p>
+        </div>
+
+        <div class="qbox-reply-box">
+          <span class="qbox-reply-label">まうさんからの回答</span>
+          <p class="qbox-reply-text">やっぱりご近所さんからの野菜のお裾分けの量ですね！毎日が食べ放題状態になります（笑）</p>
+        </div>
+      </div>
+
+      <!-- 📚 過去の回答一覧（2カラムのグリッド） -->
+      <div class="qbox-grid-container">
+
+        <!-- カード1 -->
+        <div class="qbox-answer-card">
+          <span class="qbox-nickname">さくらんぼ さん</span>
+          <span class="qbox-date">2026.07.15</span>
+          <div class="qbox-question-box">
+            <p class="qbox-question-text">虫が本当に苦手なのですが、住んでいるうちに慣れるものですか…？</p>
+          </div>
+          <div class="qbox-reply-box">
+            <span class="qbox-reply-label">まうさんからの回答</span>
+            <p class="qbox-reply-text">結論から言うと「慣れます！」というか、だんだん対策がプロになってきて怖くなくなりますよ（笑）。</p>
+          </div>
+        </div>
+
+        <!-- カード2 -->
+        <div class="qbox-answer-card">
+          <span class="qbox-nickname">オムライス さん</span>
+          <span class="qbox-date">2026.07.10</span>
+          <div class="qbox-question-box">
+            <p class="qbox-question-text">ご近所付き合いってやっぱり濃厚ですか？回覧板とか大変でしょうか？</p>
+          </div>
+          <div class="qbox-reply-box">
+            <span class="qbox-reply-label">まうさんからの回答</span>
+            <p class="qbox-reply-text">確かに都会より濃厚ですが、お裾分けをいただいたり温かい関係も多いです。無理のない範囲で参加するのがコツです。</p>
+          </div>
+        </div>
+
+        <!-- カード3 -->
+        <div class="qbox-answer-card">
+          <span class="qbox-nickname">くま さん</span>
+          <span class="qbox-date">2026.06.28</span>
+          <div class="qbox-question-box">
+            <p class="qbox-question-text">田舎暮らしで一番お気に入りのリフレッシュ方法は何ですか？</p>
+          </div>
+          <div class="qbox-reply-box">
+            <span class="qbox-reply-label">まうさんからの回答</span>
+            <p class="qbox-reply-text">縁側で何もせずに、ただ鳥の声を聞きながら淹れたてのコーヒーを飲む時間です。すごく癒やされますよ。</p>
+          </div>
+        </div>
+
+        <!-- カード4 -->
+        <div class="qbox-answer-card">
+          <span class="qbox-nickname">いちじく さん</span>
+          <span class="qbox-date">2026.06.15</span>
+          <div class="qbox-question-box">
+            <p class="qbox-question-text">冬の寒さや雪の日の暮らしはどう乗り越えていますか？</p>
+          </div>
+          <div class="qbox-reply-box">
+            <span class="qbox-reply-label">まうさんからの回答</span>
+            <p class="qbox-reply-text">ストーブの火を眺めながら温かい鍋を食べるという、冬ならではの娯楽を全力で楽しんでいます！</p>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ページトップへ戻るボタン -->
+      <a href="#" class="btn-to-top" aria-label="ページトップへ戻る">↑</a>
+    </div>
+  </main>
+
+  <!-- --- 3. Footer Area --- -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-logo">
+        <span class="footer-logo__text">いなかと、わたし。</span>
+        <span class="footer-logo__text-small">～何気ない日常にある「わたしらしい田舎暮らし」～</span>
+      </div>
+    </div>
+  </footer>
+</body>
+
+</html>

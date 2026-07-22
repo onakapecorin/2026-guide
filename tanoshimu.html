@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>楽しむ - いなかと、わたし。</title>
+  <meta name="description" content="楽しむ" />
+  <link rel="stylesheet" href="./css/common.css" />
+  <link rel="stylesheet" href="./css/kurasu.css" />
+</head>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const siteLogo = document.querySelector(".site-logo");
+    const mainNav = document.querySelector(".main-nav");
+
+    function checkNavigationLayout() {
+      document.body.classList.remove("is-mobile-mode");
+      const logoRight = siteLogo.getBoundingClientRect().right;
+      const navLeft = mainNav.getBoundingClientRect().left;
+
+      if (navLeft - logoRight < 30) {
+        document.body.classList.add("is-mobile-mode");
+      }
+    }
+
+    window.addEventListener("resize", checkNavigationLayout);
+    checkNavigationLayout();
+  });
+</script>
+
+<body>
+  <!-- --- 1. Header Area --- -->
+  <header class="site-header">
+    <div class="site-header__inner">
+      <h1 class="site-logo">
+        <a href="index.html">
+          <span class="site-logo__text">いなかと、わたし。</span>
+          <span class="site-logo__subtext">-田舎出身学生によるくらしのてびき-</span>
+        </a>
+      </h1>
+
+      <input type="checkbox" id="nav-toggle" class="visually-hidden" />
+      <label for="nav-toggle" class="nav-toggle-open" aria-label="メニューを開く">
+        <span></span><span></span><span></span>
+      </label>
+
+      <nav class="main-nav">
+        <label for="nav-toggle" class="nav-toggle-close" aria-label="メニューを閉じる">✕</label>
+        <ul class="nav-list">
+          <li><a href="index.html" class="nav-list__link">ホーム</a></li>
+          <li><a href="kurasu.html" class="nav-list__link">暮らす</a></li>
+          <li><a href="hito.html" class="nav-list__link">人と関わる</a></li>
+          <li><a href="taberu.html" class="nav-list__link">食べる</a></li>
+          <li><a href="tanoshimu.html" class="nav-list__link current-page">楽しむ</a></li>
+          <li><a href="kininaru.html" class="nav-list__link">キニナルイナカ</a></li>
+          <li><a href="nichijo.html" class="nav-list__link">いなかの日常</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- --- 2. Main Content Area --- -->
+  <main class="site-main">
+    <section class="page-hero" style="background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 100%), url('img/3.png');">
+  <h1 class="page-hero__title">楽しむ</h1>
+</section>
+
+    <div class="container">
+      <!-- 目次セクション -->
+      <div class="toc-block">
+        <ul class="toc-list">
+          <li><a href="#topic-1"><span>1.</span> 玄関直結、遊び放題ライフ </a></li>
+          <li><a href="#topic-2"><span>2.</span> プライベートプラネタリウム</a></li>
+          <li><a href="#topic-3"><span>3.</span> 田舎で味わう「時間リッチ」</a></li>
+        </ul>
+      </div>
+
+      <!-- 記事コンテンツセクション全体 -->
+      <section class="article-content-body">
+        <!-- トピック1 -->
+        <div id="topic-1" class="article-section">
+          <div class="article-header">
+            <div class="article-title-wrap">
+              <div class="number-badge">1</div>
+              <div class="article-title">
+                <div class="article-title__sub">渋滞知らず！
+                </div>
+                <h3 class="article-title__main">玄関直結、遊び放題ライフ</h3>
+              </div>
+            </div>
+            <div class="difficulty-badge">
+              田舎の移動ストレス度：☆☆☆☆☆<br />
+              都会とのギャップ：★★★★☆<br />
+              必要なスキル：<br />身近な自然を全力で遊び倒すアイディア
+            </div>
+          </div>
+
+          <div class="dialogue-section">
+            <div class="dialogue-row">
+              <!-- Aさん側 -->
+              <div class="dialogue-user-wrap">
+                <div class="dialogue-avatar"
+                  style="overflow: hidden; display: flex; align-items: center; justify-content: center;">
+                  <img src="img/icon.png" alt="Aさん" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+                <span class="dialogue-name">Aさん</span>
+              </div>
+              <div class="dialogue-text">「明日キャンプ行くから、朝4時起きで3時間ドライブだよ〜」</div>
+            </div>
+            <div class="dialogue-row">
+              <!-- まうさん側 -->
+              <div class="dialogue-user-wrap">
+                <div class="dialogue-avatar"
+                  style="overflow: hidden; display: flex; align-items: center; justify-content: center;">
+                  <img src="img/m1.png" alt="まうさん" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+                <span class="dialogue-name">まうさん</span>
+              </div>
+              <div class="dialogue-text">「大変だね…。（田舎なら、玄関出てすぐの庭にテント張れば、移動時間0秒で大自然キャンプできるけどなあ。）」</div>
+            </div>
+          </div>
+
+          <h4 class="highlight-heading">庭も、裏山も、川も。全部が遊び場</h4>
+          <p class="article-text">
+            都会で「アウトドア」をしようとすると、事前の予約、荷造り、そして長い渋滞との戦いがセットになりがちです。<br />
+            でも、田舎ではそんな苦労は一切必要ありません。<br />
+            玄関のドアを開けた一歩目から、そこはもう大自然の遊び場。<br />
+            週末に「よし、BBQしよう」と思い立ったら、5分後には庭で火を起こしているような、圧倒的なフットワークの軽さがあります。
+          </p>
+
+          <div class="icon-heading">
+            <span class="icon-heading__icon">💡</span>
+            <h4 class="icon-heading__text">「ご近所ゆるアウトドア」の楽しみ方</h4>
+          </div>
+          <p class="article-text secondary-intro">
+            お金も時間もかけずに、日常の中でバケーション気分を味わえます。
+          </p>
+
+          <ul class="custom-list">
+            <li> 「お庭キャンプ」は、家の電気とトイレをフル活用する<br /> → ガチのアウトドアと違って、インフラがすぐ後ろにあるので、初心者の方でも快適にキャンプが楽しめます♪</li>
+            <li> 小さい川などの秘密のスポットを見つけておく<br /> → 自分たちだけの特別な場所で、のんびり自然の音を聴くほど贅沢なことはありません。</li>
+            <li> 「思い立ったらすぐやる」フットワークの軽さを持つ<br /> → 天気がいいから夕飯はお外で食べよう！くらいの気軽さが田舎の特権です。</li>
+          </ul>
+
+          <hr class="thin-separator" aria-hidden="true" />
+
+          <div class="epilogue-block">
+            <p>移動に何時間もかけずに、日常のすぐ隣に大自然がある暮らし。</p>
+            <p>都会の人工的なアミューズメントパークも楽しいけれど、</p>
+            <p>虫の声を聴きながら庭でランタンを灯し、ただ星を眺めるだけで、 </p>
+            <p>心の中にたまっていた疲れがすーっと溶けていきます。</p>
+            <p>贅沢な設備なんてなくても、</p>
+            <p>「すぐそこにある自然」を工夫して遊ぶ楽しさは、</p>
+            <p>大人になった今でも私たちをワクワクさせてくれます。</p>
+          </div>
+          <hr class="thin-separator" aria-hidden="true" />
+        </div>
+
+        <div id="topic-2" class="article-section">
+          <div class="article-header">
+            <div class="article-title-wrap">
+              <div class="number-badge">2</div>
+              <div class="article-title">
+                <div class="article-title__sub">入場料はゼロ円！毎晩開演！</div>
+                <h3 class="article-title__main">プライベートプラネタリウム</h3>
+              </div>
+            </div>
+            <div class="difficulty-badge">
+              田舎の節約度：★★★★★<br />
+              都会とのギャップ：★★★★☆<br />
+              必要なスキル：<br />
+              スマホから手を離す、<br />
+              静かに夜空を眺める力
+            </div>
+          </div>
+
+          <div class="dialogue-section">
+            <div class="dialogue-row">
+              <!-- Aさん側 -->
+              <div class="dialogue-user-wrap">
+                <div class="dialogue-avatar"
+                  style="overflow: hidden; display: flex; align-items: center; justify-content: center;">
+                  <img src="img/icon.png" alt="Aさん" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+                <span class="dialogue-name">Aさん</span>
+              </div>
+              <div class="dialogue-text">「プラネタリウムのチケット、人気すぎて予約取れなかったよ〜」</div>
+            </div>
+            <div class="dialogue-row">
+              <!-- まうさん側 -->
+              <div class="dialogue-user-wrap">
+                <div class="dialogue-avatar"
+                  style="overflow: hidden; display: flex; align-items: center; justify-content: center;">
+                  <img src="img/m1.png" alt="まうさん" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+                <span class="dialogue-name">まうさん</span>
+              </div>
+              <div class="dialogue-text">「残念だね…。（田舎なら、パジャマのまま一歩外に出るだけで、天然の星空が見られちゃうよん♪）」</div>
+            </div>
+          </div>
+
+          <h4 class="highlight-heading">街灯が少ないからこそ、輝く夜がある</h4>
+          <p class="article-text">
+            都会の夜は明るく便利ですが、その光のせいで、空にある美しいものが見えにくくなっています。<br />
+            田舎は夜になると適度に暗いため、ただ庭に出るだけで、言葉を失うような満天の星空が広がっています。<br />
+            お金を払って席を予約する必要も、誰かの咳払いを気にする必要もありません。<br />
+            静寂の中でただ自分だけの「プラネタリウム」が始まります。
+          </p>
+
+          <div class="icon-heading">
+            <span class="icon-heading__icon">💡</span>
+            <h4 class="icon-heading__text">極上の「天体観測のススメ」</h4>
+          </div>
+          <p class="article-text secondary-intro">
+            誰にも邪魔されずに、宇宙の広がりをただ体感するためのロマンチックな知恵です。
+          </p>
+
+          <ul class="custom-list">
+            <li> 部屋の電気を全部消して、外に出て5分間待つ<br /> → 目が暗闇に慣れてくると、最初は見えなかった小さな星々や天の川までくっきりと浮かび上がってきます。</li>
+            <li> お気に入りのレジャーシートと枕を庭に敷く<br /> → ゴロンと寝転がって夜空全体を視野に入れるのが一番の観測方法！</li>
+            <li>温かいココアやお茶を持って出る<br /> → 少し肌寒い夜でも、温かい飲み物があれば何時間でも贅沢な時間を過ごせます。</li>
+          </ul>
+
+          <hr class="thin-separator" aria-hidden="true" />
+
+          <div class="epilogue-block">
+            <p>流れ星が流れたとき、</p>
+            <p>都会のように「あ！」と騒ぐことなく、ただ静かに心の中で願い事をするような、</p>
+            <p>そんな贅沢な時間がそこにはあります。</p>
+            <p>自分の小ささを思い知らされるような</p>
+            <p>圧倒的な星空を見上げていると、</p>
+            <p>大学の課題や都会での小さな悩みなんて、どうでもよくなってくるから不思議です。</p>
+            <p>スマホの画面を閉じて、</p>
+            <p>「奇跡のような夜空」に身を浸してみてください。</p>
+          </div>
+          <hr class="thin-separator" aria-hidden="true" />
+        </div>
+
+        <div id="topic-3" class="article-section">
+          <div class="article-header">
+            <div class="article-title-wrap">
+              <div class="number-badge">3</div>
+              <div class="article-title">
+                <div class="article-title__sub">「何もしない」が最大の贅沢！</div>
+                <h3 class="article-title__main">田舎で味わう「時間リッチ」</h3>
+              </div>
+            </div>
+            <div class="difficulty-badge">
+              田舎の心の回復度：★★★★★<br />
+              都会とのギャップ：★★★★★<br />
+              必要なスキル：<br />「遅れること」を恐れない心、<br />のんびりした心
+            </div>
+          </div>
+
+          <div class="dialogue-section">
+            <div class="dialogue-row">
+              <!-- Aさん側 -->
+              <div class="dialogue-user-wrap">
+                <div class="dialogue-avatar"
+                  style="overflow: hidden; display: flex; align-items: center; justify-content: center;">
+                  <img src="img/icon.png" alt="Aさん" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+                <span class="dialogue-name">Aさん</span>
+              </div>
+              <div class="dialogue-text">「あのSNSで話題のお店、もう行った？早く行かないと時代遅れになっちゃうよ！」</div>
+            </div>
+            <div class="dialogue-row">
+              <!-- まうさん側 -->
+              <div class="dialogue-user-wrap">
+                <div class="dialogue-avatar"
+                  style="overflow: hidden; display: flex; align-items: center; justify-content: center;">
+                  <img src="img/m1.png" alt="まうさん" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+                <span class="dialogue-name">まうさん</span>
+              </div>
+              <div class="dialogue-text">「まだ行けてないよ！（流行を追いかけるの、ちょっと疲れちゃったな…。田舎でのんびり過ごす時間、最高に幸せだったなぁ。）」</div>
+            </div>
+          </div>
+
+          <h4 class="highlight-heading">流行っているものがないから、自由になれる</h4>
+          <p class="article-text">
+            都会での生活は刺激的ですが、常に新しいスポット、流行のカフェ、バズっている服などを追いかける「目に見えない焦り」がつきまといます。<br />
+            でも、田舎には良くも悪くも最新のトレンドはありません。<br />
+            流行を追いかける必要がなくなると、不思議なことに、時計の針がゆっくり回り始め、<br />
+            自分の心に本当にゆとり、「時間リッチ」が生まれてくるのです。
+          </p>
+
+          <div class="icon-heading">
+            <span class="icon-heading__icon">💡</span>
+            <h4 class="icon-heading__text">贅沢に「時間を溶かす知恵」</h4>
+          </div>
+          <p class="article-text secondary-intro">
+            予定を詰め込まず、ただ自分本来のリズムを取り戻すための心地いい暮らしのヒントです。
+          </p>
+
+          <ul class="custom-list">
+            <li> 「SNSの通知」をオフにする<br /> → せっかく時間の流れが遅い田舎にいるので、スマホから距離を置いてデジタルデトックスをしましょう。</li>
+            <li> 縁側やリビングのソファで、ただ「ぼーっと外を眺める」<br /> → 雲の動きや木の揺れを眺めるだけで、脳の疲れが驚くほどスッキリ取れていきます！</li>
+            <li> あえて「時間がかかること」をやってみる → 凝った料理をイチから作ったり、分厚い本を1日中読んだり。タイパを気にしない贅沢を味わいます。</li>
+          </ul>
+
+          <hr class="thin-separator" aria-hidden="true" />
+
+          <div class="epilogue-block">
+            <p>都会での「充実した毎日」はとても魅力的ですが、</p>
+            <p>たまには何もない地方で、誰の目も流行も気にせず、</p>
+            <p>自分の好きなように時間を贅沢に使う日があってもいいはずです。 </p>
+            <p>タイパばかりが重視される現代だからこそ、</p>
+            <p>あえて「無駄な時間」を存分に楽しむ。</p>
+            <p>田舎で取り戻したその「自分本来の心地いいリズム」は、</p>
+            <p>都会に戻った後のあなたの暮らしを、もっとしなやかに、</p>
+            <p>もっと優しく支えてくれる一生の宝物になります。</p>
+          </div>
+          <hr class="thin-separator" aria-hidden="true" />
+        </div>
+
+      </section>
+
+      <!-- ページトップへ戻るボタン -->
+      <a href="#" class="btn-to-top" aria-label="ページトップへ戻る">↑</a>
+    </div>
+  </main>
+
+  <!-- --- 3. Footer Area --- -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-logo">
+        <span class="footer-logo__text">いなかと、わたし。</span>
+        <span class="footer-logo__text-small">～何気ない日常にある「わたしらしい田舎暮らし」～</span>
+      </div>
+    </div>
+  </footer>
+</body>
+
+</html>
